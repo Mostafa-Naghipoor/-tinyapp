@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Mostafa-Naghipoor/tinyapp/issues"
   },
-  "homepage": "https://github.com/Mostafa-Naghipoor/tinyapp#readme"
+  "homepage": "https://github.com/Mostafa-Naghipoor/tinyapp#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
