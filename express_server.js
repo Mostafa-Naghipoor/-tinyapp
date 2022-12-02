@@ -3,6 +3,7 @@ const app = express();
 const PORT = 8080; // default port 8080
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
+const bcrypt = require('bcrypt');
 app.use(express.urlencoded({ extended: true }));
 
 app.set("view engine", "ejs");
@@ -11,16 +12,7 @@ app.use(cookieSession({
   name: 'session',
   keys: ['key1', 'key2'],
 }));
-const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-function generateString(length) {
-    let result = ' ';
-    const charactersLength = characters.length;
-    for ( let i = 0; i < length; i++ ) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
 
-    return result;
-};
 const urlDatabase = {
   b6UTxQ: { longURL: "https://www.tsn.ca", userID: "aJ48lW" },
   i3BoGr: { longURL: "https://www.google.ca", userID: "aJ48lW" }
@@ -170,6 +162,11 @@ app.post('/login', (req, res) => {
   } else {
     res.status(403).redirect('/login?failed=true');
   }
+});
+// Logout
+app.post('/logout', (req, res) => {
+  req.session['user_id'] = null;
+  res.redirect('/');
 });
 //Register page 
 app.get('/register', (req, res) => {
