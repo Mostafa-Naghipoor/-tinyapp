@@ -1,30 +1,30 @@
-const express = require("express");
+/////////////////////////////////  Config /////////////////////////////////////
+const express = require('express');
 const app = express();
-const PORT = 8080; // default port 8080
+const PORT = 8080;
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
-
+const methodOverride = require('method-override')
 const { checkIfUserExists, findUser, returnUsersUrls, generateRandomString } = require('./helper.js');
-app.use(express.urlencoded({ extended: true }));
-
-app.set("view engine", "ejs");
+app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieSession({
   name: 'session',
   keys: ['key1', 'key2'],
 }));
-
+app.use(methodOverride('_method'))
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
+
 
 const urlDatabase = {
   b6UTxQ: { longURL: "https://www.tsn.ca", userID: "aJ48lW" },
   i3BoGr: { longURL: "https://www.google.ca", userID: "aJ48lW" }
 };
-
 const users = {};
+/////////////////////////////////  App Routes /////////////////////////////////
 // First page
 app.get('/', (req, res) => {
   res.redirect('/urls');
@@ -169,11 +169,15 @@ app.post('/login', (req, res) => {
     res.status(403).redirect('/login?failed=true');
   }
 });
+
 // Logout
 app.post('/logout', (req, res) => {
   req.session['user_id'] = null;
   res.redirect('/');
 });
+
+
+
 //Register page 
 app.get('/register', (req, res) => {
   if (users[req.session['user_id']]) {

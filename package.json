@@ -1,10 +1,10 @@
 {
   "name": "tinyapp",
   "version": "1.0.0",
-  "description": "",
+  "description": "week three project ",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/.bin/nodemon -L express_server.js",
+    "start": "nodemon -L express_server.js",
     "test": "./node_modules/mocha/bin/mocha"
   },
   "repository": {
@@ -12,13 +12,14 @@
     "url": "git+https://github.com/Mostafa-Naghipoor/tinyapp.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Mostafa Naghipoor",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Mostafa-Naghipoor/tinyapp/issues"
   },
   "homepage": "https://github.com/Mostafa-Naghipoor/tinyapp#readme",
   "dependencies": {
+    "@types/cookie-parser": "^1.4.3",
     "bcrypt": "^5.1.0",
     "cookie-parser": "^1.4.6",
     "cookie-session": "^2.0.0",
@@ -30,5 +31,8 @@
     "chai": "^4.3.7",
     "mocha": "^10.1.0",
     "nodemon": "^2.0.20"
+  },
+  "directories": {
+    "test": "test"
   }
 }
